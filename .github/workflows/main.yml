@@ -1,0 +1,25 @@
+  update-gist:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+          pip install pytz
+          
+      - name: Update logtime gist
+        env:
+          FT_USERNAME: ${{ secrets.FT_USERNAME }}
+          FT_CLIENT_ID: ${{ secrets.FT_CLIENT_ID }}
+          FT_CLIENT_SECRET: ${{ secrets.FT_CLIENT_SECRET }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GIST_ID: ${{ secrets.GIST_ID }}
+        run: python scripts/fetch_logtime.py
