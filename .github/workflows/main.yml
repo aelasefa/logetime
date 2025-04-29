@@ -1,3 +1,11 @@
+name: Update 42 Logtime Gist
+
+on:
+  schedule:
+    - cron: '* * * * *'  # Run every 6 hours
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
   update-gist:
     runs-on: ubuntu-latest
     steps:
